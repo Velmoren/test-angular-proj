@@ -28,6 +28,7 @@ export class PostComponent implements AfterContentInit, OnChanges, DoCheck {
     text: ''
   }
   @Output() onRemove = new EventEmitter<number>()
+
   @ContentChild('info') infoRef!: ElementRef
 
   removePost() {
