@@ -1,30 +1,33 @@
 <div class="container">
-  <h1>Angular Components</h1>
+  <h1>Angular Directives</h1>
 
-  <h2>Sub header</h2>
-
-  <app-post-form
-    (onAdd)="updatePosts($event)"
-  ></app-post-form>
-
-  <hr>
-
-  <app-post
-    *ngFor="let post of posts"
-    [post]="post"
-    (onRemove)="removePost($event)"
+  <p
+    [appStyle]="'red'"
+    [dStyles]="{border: '1px solid blue', borderRadius: '5px', fontWeight: 'bold'}"
   >
-    <div #info>
-      <small *ngIf="post.text.length > 10; else short">Пост длинный</small>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi, nemo.
+  </p>
 
-      <ng-template #short>
-        <small>Пост короткий</small>
-      </ng-template>
-    </div>
-  </app-post>
+  <p
+    [appStyle]="'red'"
+    [dStyles]="{border: '1px solid red', borderRadius: '15px', fontWeight: 'bold'}"
+  >
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi, nemo.
+  </p>
 
+  <button class="btn" (click)="isVisible = !isVisible">Toggle</button>
 
+<!--  <div *ngIf="isVisible" class="wrap">-->
+<!--    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium deserunt explicabo magni nostrum placeat possimus quibusdam recusandae sit ullam veniam?</p>-->
+<!--  </div>-->
+
+<!--  <ng-template [ngIf]="isVisible">-->
+<!--    <div class="wrap">-->
+<!--      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium deserunt explicabo magni nostrum placeat possimus quibusdam recusandae sit ullam veniam?</p>-->
+<!--    </div>-->
+<!--  </ng-template>-->
+
+  <div class="wrap" *appIfnot="!isVisible">
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium deserunt explicabo magni nostrum placeat possimus quibusdam recusandae sit ullam veniam?</p>
+  </div>
 </div>
-
-
-
