@@ -1,33 +1,3 @@
 <div class="container">
   <h1>Angular Directives</h1>
-
-  <p
-    [appStyle]="'red'"
-    [dStyles]="{border: '1px solid blue', borderRadius: '5px', fontWeight: 'bold'}"
-  >
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi, nemo.
-  </p>
-
-  <p
-    [appStyle]="'red'"
-    [dStyles]="{border: '1px solid red', borderRadius: '15px', fontWeight: 'bold'}"
-  >
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi, nemo.
-  </p>
-
-  <button class="btn" (click)="isVisible = !isVisible">Toggle</button>
-
-<!--  <div *ngIf="isVisible" class="wrap">-->
-<!--    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium deserunt explicabo magni nostrum placeat possimus quibusdam recusandae sit ullam veniam?</p>-->
-<!--  </div>-->
-
-<!--  <ng-template [ngIf]="isVisible">-->
-<!--    <div class="wrap">-->
-<!--      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium deserunt explicabo magni nostrum placeat possimus quibusdam recusandae sit ullam veniam?</p>-->
-<!--    </div>-->
-<!--  </ng-template>-->
-
-  <div class="wrap" *appIfnot="!isVisible">
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium deserunt explicabo magni nostrum placeat possimus quibusdam recusandae sit ullam veniam?</p>
-  </div>
 </div>

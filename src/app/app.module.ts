@@ -4,14 +4,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {FormsModule} from "@angular/forms";
-import {StyleDirective} from "./directives/style.directive";
-import { IfnotDirective } from './directives/ifnot.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
-    StyleDirective,
-    IfnotDirective,
   ],
   imports: [
     BrowserModule,
