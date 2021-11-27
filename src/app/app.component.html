@@ -1,3 +1,99 @@
 <div class="container">
-  <h1>Angular Directives</h1>
+  <form class="card" [formGroup]="form" (ngSubmit)="submit()">
+    <h1>Angular Forms</h1>
+
+    <div class="form-control">
+      <label>Email</label>
+      <input type="text" placeholder="Email" formControlName="email">
+      <div
+        *ngIf="email?.invalid && (email?.touched || email?.dirty)"
+        class="validation"
+      >
+        <small *ngIf="email?.errors?.['required']">
+          Поле email не может быть пустым
+        </small>
+
+        <small *ngIf="email?.errors?.['email']">
+          Введите корректный email
+        </small>
+
+        <small *ngIf="email?.errors?.['restrictedEmail']">
+          Запрещенный email!
+        </small>
+      </div>
+    </div>
+
+    <div class="form-control">
+      <label>Пароль</label>
+      <input type="password" placeholder="Пароль" formControlName="password">
+      <div
+        *ngIf="password?.invalid && (password?.touched || password?.dirty)"
+        class="validation"
+      >
+        <small *ngIf="password?.errors?.['required']">
+          Поле password не может быть пустым
+        </small>
+
+        <small *ngIf="password?.errors?.['minlength']">
+          Длина вашего пароля {{password?.errors?.['minlength']['actualLength']}}. Пароль должен быть
+          минимум {{password?.errors?.['minlength']['requiredLength']}} символов!
+        </small>
+      </div>
+    </div>
+
+    <div class="card" formGroupName="address">
+      <h2>Адрес</h2>
+
+      <div class="form-control">
+        <label>Страна</label>
+
+        <select formControlName="country">
+          <option value="ru">Россия</option>
+          <option value="ua">Украина</option>
+          <option value="by">Беларусь</option>
+        </select>
+      </div>
+
+      <div class="form-control">
+        <input type="text" formControlName="city">
+      </div>
+
+      <button class="btn" type="button" (click)="setCapital()">Выбрать столицу</button>
+    </div>
+
+    <div class="card" formGroupName="skills">
+      <h2>Ваши навыки</h2>
+      <button class="btn" type="button" (click)="addSkill()">Добавить умение</button>
+
+      <div
+        class="form-control"
+        *ngFor="let control of skillsControls.controls; let idx = index"
+      >
+        <label class="form-label">
+          Умение {{idx + 1}}
+          <span
+            style="padding-left: 20px; cursor: pointer"
+            (click)="removeSkill(idx)"
+          >&times;</span>
+        </label>
+        <input type="text" [formControlName]="idx">
+      </div>
+
+    </div>
+
+    <button class="btn" type="submit" [disabled]="form.invalid">Отправить</button>
+
+  </form>
+
+  <app-switch
+    [(ngModel)]="appState"
+    (ngModelChange)="handleChange()"
+  ></app-switch>
+
+  <hr>
+
+  <p>appState: {{appState}}</p>
 </div>
+
+
+
