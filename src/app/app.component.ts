@@ -1,12 +1,7 @@
 import {Component, OnInit} from '@angular/core'
 import {HttpClient} from "@angular/common/http";
 import {delay} from "rxjs";
-
-export interface Todo {
-  completed: boolean
-  title: string
-  id?: number
-}
+import {Todo, TodosService} from "./todos.service";
 
 @Component({
   selector: 'app-root',
@@ -18,23 +13,23 @@ export class AppComponent implements OnInit {
   todos: Todo[] = []
   todoTitle: string = ''
   loading: boolean = false
+  error: string = ''
 
-  constructor(private http: HttpClient) {
+  constructor(private todosService: TodosService) {
   }
 
   ngOnInit() {
-    // this.http.get<Todo[]>('https://jsonplaceholder.typicode.com/todos?_limit=2').subscribe(todos => {this.todos = todos})
-
     this.getTodos()
   }
 
   getTodos() {
     this.loading = true
-    this.http.get<Todo[]>('http://localhost:3000/todos')
-      .pipe(delay(500))
+    this.todosService.getTodos()
       .subscribe(todos => {
         this.todos = todos
         this.loading = false
+      }, error => {
+        this.error = error.message
       })
   }
 
@@ -43,20 +38,30 @@ export class AppComponent implements OnInit {
 
     const newTodo: Todo = {title: this.todoTitle, completed: false}
 
-    // this.http.post('https://jsonplaceholder.typicode.com/todos', newTodo).subscribe(todo => {console.log(todo)})
-    this.http.post<Todo[]>('http://localhost:3000/todos', newTodo)
+    this.todosService.addTodos(newTodo)
       .subscribe(todo => {
         this.getTodos()
         this.todoTitle = ''
+      }, error => {
+        this.error = error.message
       })
   }
 
   deleteTodo(id?: number) {
-    this.http.delete(`http://localhost:3000/todos/${id}`)
+    this.todosService.deleteTodo(id)
       .subscribe(() => {
-        // this.todos = this.todos.filter(todo => todo.id !== id)
         this.getTodos()
+      }, error => {
+        this.error = error.message
       })
+  }
+
+  completeTodo(todo: Todo) {
+    this.todosService.completeTodo(todo).subscribe((res) => {
+      this.getTodos()
+    }, error => {
+      this.error = error.message
+    })
   }
 }
 
